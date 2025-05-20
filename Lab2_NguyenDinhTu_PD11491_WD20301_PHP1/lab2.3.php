@@ -66,22 +66,24 @@
     $mangSinhVien = [];
 
     //lấy dữ liệu của sinh viên từ form
-    $hoTen = $_POST["hoTen"];
-    $gioiTinh = $_POST["gioiTinh"];
-    $ngaySinh = $_POST["ngaySinh"];
-    $diemTB = $_POST["diemTB"];
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $hoTen = $_POST["hoTen"];
+        $gioiTinh = $_POST["gioiTinh"];
+        $ngaySinh = $_POST["ngaySinh"];
+        $diemTB = $_POST["diemTB"];
 
-    //khởi tạo đối tượng sinh viên và truyền thông tin vào đối tượng
-    $sinhVien = new SinhVien($hoTen,$gioiTinh,$ngaySinh,$diemTB);
-
-    //đưa thông tin sinh viên vào mảng
-    $mangSinhVien[] = $sinhVien;
-
-    //hiển thị thông tin sinh viên đã lưu (duyệt mảng)
-    echo "<h2>Thông tin sinh viên đã lưu</h2>";
-    foreach($mangSinhVien as $sv){
-        $sv->hienThiThongTin();
-        echo "<hr>";
+        //khởi tạo đối tượng sinh viên và truyền thông tin vào đối tượng
+        $sinhVien = new SinhVien($hoTen,$gioiTinh,$ngaySinh,$diemTB);
+        
+        //đưa thông tin sinh viên vào mảng
+        $mangSinhVien[] = $sinhVien;
+        
+        //hiển thị thông tin sinh viên đã lưu (duyệt mảng)
+        echo "<h2>Thông tin sinh viên đã lưu</h2>";
+        foreach($mangSinhVien as $sv){
+            $sv->hienThiThongTin();
+            echo "<hr>";
+        }
     }
 ?>
 <!DOCTYPE html>
