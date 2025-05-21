@@ -1,11 +1,12 @@
 <?php
+    define("ROOT",__DIR__);
     //đây là file dùng để điều hướng các trang
     //kiểm tra action trên đường dẫn
     $action = isset($_GET["action"])? $_GET["action"]:"home";
 
     //kiểm tra các điều kiện để chuyển hướng trang
     switch($action){
-        //điều hướng tới thư mục điều khiển sản phẩm
+        //điều hướng tới thư mục điều khiển trang chủ
         case "home":
             require "./controllers/homeController.php";
         break;
