@@ -1,23 +1,33 @@
 <?php
+    //tạo hằng số cho đường dẫn tuyệt đối
     define("ROOT",__DIR__);
-    //đây là file dùng để điều hướng các trang
-    //kiểm tra action trên đường dẫn
-    $action = isset($_GET["action"])? $_GET["action"]:"home";
 
-    //kiểm tra các điều kiện để chuyển hướng trang
+    //hiển thị phần đầu trang
+    require_once ROOT."/Views/header.php";
+
+    //Nhận tham số đường dẫn
+    $action = isset($_GET["action"]) ? $_GET["action"]: "home";
+
     switch($action){
-        //điều hướng tới thư mục điều khiển trang chủ
+        //chuyển đến điều khiển trang chủ
         case "home":
-            require "./controllers/homeController.php";
-        break;
-        
-        //điều hướng tới thư mục điều khiển sản phẩm
-        case "product":
-            require "./controllers/productController.php";
+            require_once ROOT."/Controller/HomeController.php";
+            $home = new HomeController();
+            $home->index();
         break;
 
-        //nếu giá trị khác thì báo lỗi
-        default:
-            echo "404 - Trang không tồn tại";
+        //chuyển đến trang điều khiển sản phẩm
+        case "product":
+            require_once ROOT."/Controller/ProductController.php";
+            $products = new ProductController();
+            $products->index();
+        break;
+
+        //nếu sai giá trị thì hiển thị lỗi
+        default: 
+            require_once ROOT."/Views/404.php";
     }
+
+    //hiển thị phần cuối trang
+    require_once ROOT. "/Views/footer.php";
 ?>
