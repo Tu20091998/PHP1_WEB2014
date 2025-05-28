@@ -38,7 +38,6 @@
     .input-group label{
         font-size: 20px;
         color: #333;
-        
     }
 
     .input-group{
