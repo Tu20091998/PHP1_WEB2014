@@ -5,18 +5,54 @@
     //nạp trang điều khiển sản phẩm
     require_once ROOT."/Controllers/ProductController.php";
 
+    
+    //nạp trang điều khiển người dùng
+    require_once ROOT."/Controllers/UserController.php";
+    
     //xét giá trị trả về của đường dẫn
     $action = $_GET["action"] ?? "products";
+
+    //xét giá trị của đường dẫn sản phẩm
     switch($action){
-        case "products":
-            $controller = new ProductController();
-            $controller->show_products_list();
+
+        //xử lý trả về yêu cầu sản phẩm
+        case "products_display":
+            $products_display = new ProductController();
+            $products_display->show_products_list();
         break;
-        case "detail":
-            $controller = new ProductController();
+
+        case "product_detail":
+            $detail_controller = new ProductController();
             $id = $_GET["id"] ?? null;
-            $controller->products_detail($id);
+            $detail_controller->products_detail($id);
         break;
+        
+        //xử lý trả về yêu cầu tài khoản
+        case "register_display":
+            $register_display = new UserController();
+            $register_display->register_display();
+        break;
+
+        case "register_confirm":
+            $register_confirm = new UserController();
+            $register_confirm->register_confirm();
+        break;
+        
+        case "login_display":
+            $login_display = new UserController();
+            $login_display->login_display();
+        break;
+
+        case "login_confirm":
+            $login_confirm = new UserController();
+            $login_confirm->login_confirm();
+        break;
+
+        case "logout_confirm":
+            $login_confirm = new UserController();
+            $login_confirm->logout_confirm();
+        break;
+
         default:
             echo "Trang không tồn tại !"; 
         break;

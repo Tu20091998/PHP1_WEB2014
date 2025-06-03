@@ -15,28 +15,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <title>Danh sách người dùng</title>
-    <style>
-        body {
-            font-family: Arial;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="../Css/user.css">
 </head>
 <body>
     <h2>Danh sách người dùng</h2>

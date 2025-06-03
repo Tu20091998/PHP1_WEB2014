@@ -29,31 +29,9 @@ $orders = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách đơn hàng đã đặt</title>
+    <link rel="stylesheet" href="../Css/order.css">
 </head>
-<style>
-    body{
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(to right, #4facfe, #00f2fe);
-        margin: 0;
-        padding: 20px;
-    }
 
-    table{
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #ccc;
-    }
-
-    th, td{
-        border: 1px solid white;
-        padding: 15px;
-        text-align: center;
-    }
-
-    th {
-        background-color:lightgray;
-    }
-</style>
 <body>
     <h2>📦 Danh sách đơn hàng đã đặt</h2>
     <table border="1" cellpadding="10" cellspacing="0">

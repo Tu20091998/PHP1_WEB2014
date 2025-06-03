@@ -8,10 +8,13 @@
 <style>
     iframe{
         background: linear-gradient(to right, #4facfe, #00f2fe);
-        padding-bottom: 0;
+        width: 100%;
+        height: calc(100% - 180px);
+        border: none;
+        padding-bottom: 20px;
     }
 </style>
 <body>
-    <iframe src="Controllers/BaseController.php?action=products" name="main" width="100%" height="1000px"></iframe>
+    <iframe src="Controllers/BaseController.php?action=products_display" name="main" scrolling="yes"></iframe>
 </body>
 </html>

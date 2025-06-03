@@ -7,7 +7,7 @@
             $this->conn = $database->connect();
         }
 
-        //tạo hàm lấy sản phẩm
+        //hàm lấy toàn bộ sản phẩm
         public function getAllProducts(){
             $sql = "SELECT * FROM products";
             $stmt = $this->conn->query($sql);
@@ -15,7 +15,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        //tạo hàm lấy sản phẩm theo id
+        //tạo hàm để lấy ra thông tin chi tiết sản phẩm
         public function getProductById($id){
             if(!is_numeric($id)){
                 return null;

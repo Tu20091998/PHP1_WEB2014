@@ -18,7 +18,7 @@
         <p class="product-price">Giá: <?php echo number_format($product["price"], 0, ',', '.') . ' ₫'; ?></p>
         <p class="product-description"><?php echo $product["description"]; ?></p>
         <form method="POST">
-            <a href="index.php" class="return_page">← Quay lại danh sách</a>
+            <a href="BaseController.php?action=products" target="main" class="return_page">← Quay lại danh sách</a>
             <input type="hidden" name="product_id" value="<?php echo $product["id"]; ?>">
             <button type="submit" name="addCart">Thêm vào giỏ hàng 🛒</button>
         </form>
