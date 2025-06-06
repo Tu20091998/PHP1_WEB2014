@@ -27,5 +27,19 @@
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
+        //tạo hàm để tìm kiếm sản phẩm
+        public function getProductByName($keyword){
+            $sql = "SELECT * FROM products WHERE name LIKE :keyword";
+            $stmt = $this->conn->prepare($sql);
+
+            //tạo câu lệnh chèn
+            $keyword = "%".$keyword."%";
+            $stmt->bindParam(":keyword",$keyword,PDO::PARAM_STR);
+            $stmt->execute();
+
+            //trả về tất cả các kết quả tìm kiếm
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

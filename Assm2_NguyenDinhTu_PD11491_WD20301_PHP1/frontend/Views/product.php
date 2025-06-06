@@ -9,11 +9,11 @@
 <body>
     <h1>🛍️ Danh sách sản phẩm</h1>
 
-    <?php if (empty($results)) : ?>
+    <?php if (empty($show_products_list)) : ?>
         <p class="empty-message">Danh sách trống</p>
     <?php else : ?>
         <div class="product-container">
-            <?php foreach ($results as $product) : ?>
+            <?php foreach ($show_products_list as $product) : ?>
                 <div class="product-box">
                     <img src="<?php echo $product["image"]; ?>" alt="Ảnh sản phẩm">
                     <h3 class="product-name"><?php echo $product["name"]; ?></h3>

@@ -16,8 +16,10 @@
             <a href="Controllers/BaseController.php?action=logout_confirm" target="main">Đăng xuất</a>
             <a href="" target="main">Lịch sử đơn hàng</a>
         </div>
-        <form method="GET" target="content">
-            <input type="text" name="keyword" placeholder="Tìm sản phẩm...">
+        <form method="GET" target="main" action="Controllers/BaseController.php">
+            <input type="hidden" name="action" value="search_product">
+            <input type="text" name="keyword" placeholder="Tìm sản phẩm..." 
+                value="<?php echo isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : ''; ?>">
             <button type="submit">🔍</button>
         </form>
     </div>

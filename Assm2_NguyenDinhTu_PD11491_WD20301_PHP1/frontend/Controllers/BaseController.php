@@ -5,7 +5,6 @@
     //nạp trang điều khiển sản phẩm
     require_once ROOT."/Controllers/ProductController.php";
 
-    
     //nạp trang điều khiển người dùng
     require_once ROOT."/Controllers/UserController.php";
     
@@ -22,9 +21,9 @@
         break;
 
         case "product_detail":
-            $detail_controller = new ProductController();
+            $product_detail = new ProductController();
             $id = $_GET["id"] ?? null;
-            $detail_controller->products_detail($id);
+            $product_detail->products_detail($id);
         break;
         
         //xử lý trả về yêu cầu tài khoản
@@ -53,6 +52,11 @@
             $login_confirm->logout_confirm();
         break;
 
+        case "search_product":
+            $search_product_confirm = new ProductController();
+            $search_product_confirm->product_search();
+        break;
+        
         default:
             echo "Trang không tồn tại !"; 
         break;

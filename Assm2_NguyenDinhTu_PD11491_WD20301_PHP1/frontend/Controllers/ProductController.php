@@ -12,14 +12,26 @@
 
         //tạo hàm để hiển thị danh sách sản phẩm
         public function show_products_list(){
-            $results = $this->model->getAllProducts();
+            $show_products_list = $this->model->getAllProducts();
             require_once ROOT."/Views/product.php";
         }
 
         //hàm để hiển thị chi tiết sản phẩm
         public function products_detail($id){
-            $product = $this->model->getProductById($id);
+            $product_detail = $this->model->getProductById($id);
             require_once ROOT."/Views/product_detail.php";
+        }
+
+        //hàm để hiển thị kết quả tìm kiếm sản phẩm
+        public function product_search(){
+            if(isset($_GET["keyword"])){
+                $keyword = $_GET["keyword"];
+                $product_search = $this->model->getProductByName($keyword);
+                require_once ROOT."/Views/product_search.php";
+            }
+            else{
+                require_once ROOT."/Views/product_search.php";
+            }
         }
     }
 ?>
