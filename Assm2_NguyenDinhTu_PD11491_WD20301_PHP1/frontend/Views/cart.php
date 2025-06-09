@@ -1,40 +1,4 @@
-<?php
-$carts = [
-    [
-        "cart_id" => 1,
-        "user_id" => 101,
-        "product_id" => "P001",
-        "quantity" => 2,
-        "date_added" => "2025-05-27",
-        "name" => "Cà phê sữa đá",
-        "price" => 25000,
-        "image" => "https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2024/10/11/ca-phe-17286625880331663375860.png",
-        "description" => "Ly cà phê sữa đá đậm đà, thơm ngon."
-    ],
-    [
-        "cart_id" => 2,
-        "user_id" => 101,
-        "product_id" => "P002",
-        "quantity" => 1,
-        "date_added" => "2025-05-28",
-        "name" => "Trà đào cam sả",
-        "price" => 30000,
-        "image" => "https://lypham.vn/wp-content/uploads/2024/09/cach-lam-tra-dao-cam-sa.jpg",
-        "description" => "Trà đào thanh mát với vị cam sả dễ chịu."
-    ],
-    [
-        "cart_id" => 3,
-        "user_id" => 101,
-        "product_id" => "P003",
-        "quantity" => 3,
-        "date_added" => "2025-05-28",
-        "name" => "Bánh ngọt socola",
-        "price" => 20000,
-        "image" => "https://cdn.tgdd.vn/Files/2020/05/23/1257853/cach-lam-banh-chiffon-socola-bong-mem-chuan-vi-d-12-760x367.jpg",
-        "description" => "Bánh mềm mịn với lớp socola tan chảy."
-    ]
-];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,8 +8,28 @@ $carts = [
     <link rel="stylesheet" href="../Css/cart.css">
 </head>
 <body>
+    <?php
+        // Trong view (cart_display)
+        if (isset($_SESSION['flash_message'])) {
+            $flash = $_SESSION['flash_message'];
+            echo htmlspecialchars($flash['message']);
+            echo "</div>";
+            unset($_SESSION['flash_message']); // Xóa message sau khi hiển thị
+        }
+    ?>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <div><?= htmlspecialchars($_SESSION['success']) ?></div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div><?= htmlspecialchars($_SESSION['error']) ?></div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <h1>🛒 Danh sách giỏ hàng của người dùng</h1>
-    <?php if (empty($carts)) : ?>
+    <?php if (empty($cartItems)) : ?>
         <p>Danh sách trống</p>
     <?php else : ?>
         <table>
@@ -65,7 +49,7 @@ $carts = [
             </thead>
             <tbody>
                 <?php $totalPrice = 0; ?>
-                <?php foreach ($carts as $cart) : ?>
+                <?php foreach ($cartItems as $cart) : ?>
                     <tr>
                         <td><?php echo $cart["cart_id"]; ?></td>
                         <td><?php echo $cart["user_id"]; ?></td>
@@ -85,9 +69,9 @@ $carts = [
                         <td><img src="<?php echo $cart["image"]; ?>" alt="Hình ảnh"></td>
                         <td><?php echo $cart["description"]; ?></td>
                         <td>
-                            <form method="POST">
-                                <input type="hidden" name="delete_id" value="<?php echo $cart["cart_id"]; ?>">
-                                <button type="submit" name="delete_cart" onclick="return confirm('Bạn có chắc muốn xoá không?')">🗑️ Xoá</button>
+                            <form method="POST" action="../Controllers/BaseController.php?action=cart_remove_confirm">
+                                <input type="hidden" name="product_id" value="<?php echo $cart["product_id"]; ?>">
+                                <button type="submit" onclick="return confirm('Bạn có chắc muốn xoá không?')">🗑️ Xoá</button>
                             </form>
                         </td>
                     </tr>

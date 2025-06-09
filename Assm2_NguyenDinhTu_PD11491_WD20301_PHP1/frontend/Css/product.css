@@ -97,3 +97,21 @@
     .btn-process{
         display: flex;
     }
+
+    .page_pagisnated {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .page_pagisnated a {
+        display: inline-block;
+        margin: 0 5px;
+        text-decoration: none;
+        color: white;
+        padding: 10px;
+        background-color: gray;
+    }
+
+    .total_product_display{
+        text-align: center;
+    }

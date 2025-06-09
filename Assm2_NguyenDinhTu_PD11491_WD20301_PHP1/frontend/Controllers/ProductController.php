@@ -10,9 +10,16 @@
             $this->model = new ProductModel();
         }
 
-        //tạo hàm để hiển thị danh sách sản phẩm
-        public function show_products_list(){
-            $show_products_list = $this->model->getAllProducts();
+        //hàm điều khiển hiển thị phân trang danh sách sản phẩm
+        public function products_list_pagisnated(){
+            $limit = 3;
+            $page = isset($_GET["page"]) ? max(1,intval($_GET["page"])): 1;
+            $offset = ($page - 1) * $limit;
+
+            //gọi xử lý dữ liệu
+            $products = $this->model->getProductPagisnated($limit,$offset);
+            $total = $this->model->countProduct();
+            $totalPages = ceil($total / $limit);
             require_once ROOT."/Views/product.php";
         }
 
@@ -33,5 +40,7 @@
                 require_once ROOT."/Views/product_search.php";
             }
         }
+
+        
     }
 ?>

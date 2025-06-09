@@ -41,5 +41,25 @@
             //trả về tất cả các kết quả tìm kiếm
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        //tạo hàm để phân trang sản phẩm
+        public function getProductPagisnated($limit,$offset){
+            $sql = "SELECT * FROM products LIMIT :limit OFFSET :offset";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(":limit",$limit,PDO::PARAM_INT);
+            $stmt->bindValue(":offset",$offset,PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        //tạo hàm lấy tổng số sản phẩm trong cơ sở dữ liệu
+        public function countProduct(){
+            $sql = "SELECT COUNT(*) FROM products";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+
+            //trả về 1 cột chứa số đếm
+            return $stmt->fetchColumn();
+        }
     }
 ?>

@@ -1,3 +1,9 @@
+<?php
+// Bắt buộc phải có ở đầu file view
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +14,16 @@
 </head>
 <body>
     <div class="register-container">
+        <div class="announce">
+            <!-- Hiển thị thông báo lỗi -->
+            <?php if (isset($_SESSION['register_error'])): ?>
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($_SESSION['register_error']) ?>
+                </div>
+                <?php unset($_SESSION['register_error']); ?>
+            <?php endif; ?>
+        </div>
+
         <form class="register-form" method="post" action="../Controllers/BaseController.php?action=register_confirm">
             <h2>Đăng ký</h2>
             <div class="input-group">
@@ -28,10 +44,9 @@
             <button type="submit" class="btn-register">Đăng ký ngay</button>
         </form>
         <div class="form-links">
-            <button><a href="login.php">Quay về trang đăng nhập</a></button>
+            <button><a href="../Controllers/BaseController.php?action=login_display">Quay về trang đăng nhập</a></button>
         </div>
         <br>
-        <?php if (!empty($error)) echo "<p style='color:red; text-align:center;'>$error</p>"; ?>
     </div>
 </body>
 </html>

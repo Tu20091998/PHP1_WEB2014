@@ -55,5 +55,21 @@
             }
             return false;
         }
+
+        //hàm xử lý kiểm tra mật khẩu cũ
+        public function verifyPassword($user_id,$old_password){
+            $stmt = $this->conn->prepare("SELECT password FROM users WHERE id = ?");
+            $stmt->execute([$user_id]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return password_verify($old_password, $user["password"]);
+        }
+
+        //hàm xử lý cập nhật mật khẩu mới
+        public function updatePassword($user_id, $new_password){
+            $hashedPassword = password_hash($new_password,PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+            return $stmt->execute([$hashedPassword,$user_id]);
+        }  
     }
 ?>
