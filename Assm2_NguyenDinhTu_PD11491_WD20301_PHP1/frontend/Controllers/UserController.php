@@ -3,7 +3,7 @@
     //nạp trang lấy kết quả đăng ký từ cơ sở dữ liệu
     require_once ROOT."/Models/UserModel.php";
 
-    //class chứa xử lý đăng ký, tương tác với cơ sở dữ liệu và màn hình
+    //class chứa xử lý người dùng, tương tác với cơ sở dữ liệu và màn hình
     class UserController{
 
         private $user_model;
