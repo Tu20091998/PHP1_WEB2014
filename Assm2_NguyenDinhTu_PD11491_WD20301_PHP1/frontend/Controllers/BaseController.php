@@ -11,6 +11,9 @@
     //nạp trang điều khiển giỏ hàng
     require_once ROOT."/Controllers/CartController.php";
     
+    //nạp trang điều khiển đặt hàng
+    require_once ROOT."/Controllers/OrderController.php";
+
     //xét giá trị trả về của đường dẫn
     $action = $_GET["action"] ?? "products";
 
@@ -84,6 +87,27 @@
         case "cart_remove_confirm":
             $cart_remove_confirm = new CartController();
             $cart_remove_confirm->remove_item();
+        break;
+
+        //xử lý yêu cầu đặt hàng
+        case "order_display":
+            $order_display = new OrderController();
+            $order_display->order_display();
+        break;
+
+        case "order_confirm":
+            $order_confirm = new OrderController();
+            $order_confirm->order_confirm();
+        break;
+
+        case "order_detail":
+            $order_detail = new OrderController();
+            $order_detail->order_detail_display();
+        break;
+
+        case "order_cancer":
+            $order_cancer = new OrderController();
+            $order_cancer->cancel_order();
         break;
         
         default:

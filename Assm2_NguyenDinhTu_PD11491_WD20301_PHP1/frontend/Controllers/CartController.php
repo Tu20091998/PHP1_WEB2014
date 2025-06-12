@@ -53,7 +53,7 @@
                 $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'Có lỗi xảy ra'];
             }
 
-            header("Location: BaseController.php?action=cart_display");
+            header("Location: BaseController.php?action=products_display");
             exit;
         }
 

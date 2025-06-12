@@ -1,28 +1,4 @@
-<?php
-$orders = [
-    [
-        "order_id" => 1,
-        "user_id" => 101,
-        "order_date" => "2025-05-25",
-        "product_name" => "Cà phê sữa đá",
-        "quantity" => 2
-    ],
-    [
-        "order_id" => 1,
-        "user_id" => 101,
-        "order_date" => "2025-05-25",
-        "product_name" => "Trà đào cam sả",
-        "quantity" => 1
-    ],
-    [
-        "order_id" => 2,
-        "user_id" => 102,
-        "order_date" => "2025-05-26",
-        "product_name" => "Bạc xỉu",
-        "quantity" => 3
-    ]
-];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +48,7 @@ $orders = [
                     <td><?php echo $order["order_id"]; ?></td>
                     <td><?php echo $order["user_id"]; ?></td>
                     <td><?php echo $order["order_date"]; ?></td>
-                    <td><?php echo $order["product_name"]; ?></td>
+                    <td><?php echo $order["name"]; ?></td>
                     <td><?php echo $order["quantity"]; ?></td>
                 </tr>
             <?php endforeach; ?>

@@ -1,79 +1,63 @@
-<?php
-    $products = [
-        ["name" => "Áo thun", "price" => 99000, "image" => "link1.jpg", "description" => "Áo cotton mềm"]
-    ];
-
-    // Lấy sản phẩm đầu tiên để hiển thị (giả lập)
-    $product = $products[0];
-    $id = 1; // giả lập id
-?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sửa sản phẩm</title>
-    <style>
-        body {
-            font-family: Arial;
-            padding: 30px;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-        }
-
-        form {
-            width: 40vw;
-            margin: auto;
-            background: #f1f1f1;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input, textarea {
-            width: 38vw;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 15px;
-            width: 39.5vw;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:hover{
-            background-color: lightgray;
-        }
-
-        form h2{
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="../Css/edit_product.css">
 </head>
 <body>
-    <form method="POST">
-        <h2>Sửa thông tin sản phẩm</h2>
-        <label>ID sản phẩm:</label>
-        <input type="text" name="id" value="<?php echo $id; ?>" readonly>
-
-        <label>Tên sản phẩm:</label>
-        <input type="text" name="name" value="<?php echo $product['name']; ?>">
-
-        <label>Giá:</label>
-        <input type="number" name="price" value="<?php echo $product['price']; ?>">
-
-        <label>Ảnh URL:</label>
-        <input type="text" name="image" value="<?php echo $product['image']; ?>">
-
-        <label>Mô tả:</label>
-        <textarea name="description"><?php echo $product['description']; ?></textarea>
-
-        <button type="submit">Cập nhật</button>
-    </form>
+    <div class="form-container">
+        <h1>Sửa sản phẩm</h1>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="message error"><?= $_SESSION['error'] ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+        
+        <form action="index.php?action=update_product&id=<?= $product['id'] ?>" method="post">
+            <div class="form-group">
+                <label for="name">Tên sản phẩm:</label>
+                <input type="text" id="name" name="name" value="<?= htmlspecialchars($product['name']) ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Giá:</label>
+                <input type="number" id="price" name="price" value="<?= htmlspecialchars($product['price']) ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Mô tả:</label>
+                <textarea id="description" name="description" required><?= htmlspecialchars($product['description']) ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="image">Đường dẫn ảnh:</label>
+                <input type="text" id="image" name="image" value="<?= htmlspecialchars($product['image']) ?>" required>
+                <?php if ($product['image']): ?>
+                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="Ảnh sản phẩm" width="100" style="margin-top: 10px;">
+                <?php endif; ?>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Số lượng:</label>
+                <input type="number" id="quantity" name="quantity" value="<?= htmlspecialchars($product['product_quantity']) ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="category_id">Danh mục:</label>
+                <select id="category_id" name="category_id" required>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category['id'] ?>" <?= $category['id'] == $product['category_id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($category['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">Cập nhật</button>
+            <a href="index.php?action=view_products" class="btn" style="background-color: #6c757d;">Hủy</a>
+        </form>
+    </div>
 </body>
 </html>

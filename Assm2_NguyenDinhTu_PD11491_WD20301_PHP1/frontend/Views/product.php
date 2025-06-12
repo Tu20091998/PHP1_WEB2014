@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="../Css/product.css">
 </head>
 <body>
+    <?php
+        // Trong view (cart_display)
+        if (isset($_SESSION['flash_message'])) {
+            $flash = $_SESSION['flash_message'];
+            echo htmlspecialchars($flash['message']);
+            echo "</div>";
+            unset($_SESSION['flash_message']); // Xóa message sau khi hiển thị
+        }
+    ?>
     <h1>🛍️ Danh sách sản phẩm</h1>
     <h3 class="total_product_display">Tổng số sản phẩm: <?php echo $total?> sản phẩm</h3>
     <?php if (empty($products)) : ?>

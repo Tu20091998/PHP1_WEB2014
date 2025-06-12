@@ -56,7 +56,8 @@
             }
             else{
                 //nếu sản phẩm không tồn tại trong giỏ hàng thì thêm mới
-                $insert_sql = "INSERT INTO cart(user_id, product_id, quantity, date_added) 
+                $insert_sql = "INSERT
+                                INTO cart(user_id, product_id, quantity, date_added) 
                                 VALUES(:user_id, :product_id, 1,NOW())";
                 $insert_stmt = $this->conn->prepare($insert_sql);
                 $insert_stmt->bindParam(":user_id",$user_id,PDO::PARAM_INT);
@@ -68,11 +69,39 @@
 
         //hàm xoá sản phẩm trong giỏ hàng
         public function removeItem($user_id,$product_id){
-            $sql = "DELETE FROM cart WHERE user_id = :user_id AND product_id = :product_id";
+            $sql = "DELETE
+                    FROM cart 
+                    WHERE user_id = :user_id 
+                    AND product_id = :product_id";
+
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":user_id",$user_id,PDO::PARAM_INT);
             $stmt->bindParam(":product_id",$product_id,PDO::PARAM_INT);
             return $stmt->execute();
         }
+
+        //hàm xoá toàn bộ sản phẩm trong giỏ hàng theo id của người dùng
+        public function removeCart($user_id){
+            $sql = "DELETE
+                    FROM cart 
+                    WHERE user_id = :user_id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":user_id",$user_id,PDO::PARAM_INT);
+            return $stmt->execute();
+        }
+
+        //hàm lấy ra toàn bộ sản phẩm trong giỏ hàng theo id người dùng
+        public function getCartByUserId($user_id){
+            $sql = "SELECT * 
+                    FROM cart 
+                    WHERE user_id = :user_id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":user_id",$user_id,PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
     }
 ?>

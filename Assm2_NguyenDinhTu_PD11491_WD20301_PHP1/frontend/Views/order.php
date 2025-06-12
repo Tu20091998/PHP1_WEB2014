@@ -1,61 +1,67 @@
-<?php
-$orders = [
-    [
-        "order_id" => 1,
-        "user_id" => 101,
-        "order_date" => "2025-05-25",
-        "product_name" => "Cà phê sữa đá",
-        "quantity" => 2
-    ],
-    [
-        "order_id" => 1,
-        "user_id" => 101,
-        "order_date" => "2025-05-25",
-        "product_name" => "Trà đào cam sả",
-        "quantity" => 1
-    ],
-    [
-        "order_id" => 2,
-        "user_id" => 102,
-        "order_date" => "2025-05-26",
-        "product_name" => "Bạc xỉu",
-        "quantity" => 3
-    ]
-];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách đơn hàng đã đặt</title>
-    <link rel="stylesheet" href="../Css/order.css">
+    <title>Bảng lịch sử đơn hàng</title>
+    <link rel="stylesheet" href="../Css/orders.css">
 </head>
-
 <body>
-    <h2>📦 Danh sách đơn hàng đã đặt</h2>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Mã đơn hàng</th>
-                <th>Người dùng</th>
-                <th>Ngày đặt</th>
-                <th>Sản phẩm</th>
-                <th>Số lượng</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($orders as $order) : ?>
-                <tr>
-                    <td><?php echo $order["order_id"]; ?></td>
-                    <td><?php echo $order["user_id"]; ?></td>
-                    <td><?php echo $order["order_date"]; ?></td>
-                    <td><?php echo $order["product_name"]; ?></td>
-                    <td><?php echo $order["quantity"]; ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div class="container mt-4">
+    <h2 class="mb-4">Lịch sử đơn hàng</h2>
+    
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger"><?= $_SESSION['error'] ?></div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <?php if (empty($orders)): ?>
+        <div class="alert alert-info">Bạn chưa có đơn hàng nào</div>
+    <?php else: ?>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                    <tr>
+                        <td>#<?= $order['order_id'] ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
+                        <td><?= number_format($order['total_amount'], 0, ',', '.') ?>đ</td>
+                        <td>
+                            <?= $order['status'] ?>
+                        </td>
+                        <td>
+                            <a href="../Controllers/BaseController.php?action=order_detail&id=<?= $order['order_id'] ?>" 
+                                class="action-btn detail-btn">
+                                Xem chi tiết
+                            </a>
+                            <br>
+                            <a href="../Controllers/BaseController.php?action=order_cancer&id=<?= $order['order_id'] ?>" 
+                                class="action-btn cancel-btn"
+                                onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                                Huỷ đơn hàng
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>
 </body>
 </html>
-

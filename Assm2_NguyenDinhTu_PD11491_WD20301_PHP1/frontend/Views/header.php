@@ -14,7 +14,7 @@
             <a href="Controllers/BaseController.php?action=login_display" target="main">Tài khoản</a>
             <a href="Controllers/BaseController.php?action=cart_display" target="main">🛒 Giỏ hàng</a>
             <a href="Controllers/BaseController.php?action=logout_confirm" target="main">Đăng xuất</a>
-            <a href="" target="main">Lịch sử đơn hàng</a>
+            <a href="Controllers/BaseController.php?action=order_display" target="main">Lịch sử đơn hàng</a>
         </div>
         <form method="GET" target="main" action="Controllers/BaseController.php">
             <input type="hidden" name="action" value="search_product">

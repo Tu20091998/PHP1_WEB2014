@@ -1,0 +1,64 @@
+<?php
+    require_once ROOT."/Models/ProductsModel.php";
+    class ProductController {
+        private $model;
+
+        public function __construct() {
+            $this->model = new ProductsModel();
+        }
+
+        //hàm hiển thị danh mục sản phẩm sắp hết hàng
+        public function products_information(){
+            $products_out_of_stock_list = $this->model->getProductsOutOfStockList();
+            $best_seller = $this->model->getProductsBestSeller();
+            require_once ROOT."/Views/home_admin.php";
+        }
+
+        // Hàm hiển thị sản phẩm kèm danh mục
+        public function showCategoriesWithProducts() {
+            $categories_list = $this->model->getCategoriesWithProducts();
+            require_once ROOT.'Views/products.php';
+        }
+
+        // Hàm xử lý xoá sản phẩm
+        public function deleteProduct($productId) {
+            if ($this->model->deleteProduct($productId)) {
+                $_SESSION['message'] = "Xoá sản phẩm thành công !";
+            } else {
+                $_SESSION['error'] = "Lỗi khi xoá sản phẩm !";
+            }
+            header("Location:Basecontroller.php?action=products_display");
+            exit();
+        }
+
+        public function showEditProductForm($productId) {
+            $product = $this->model->getProductById($productId);
+            $categories = $this->model->getAllCategories();
+
+            require_once ROOT.'/Views/edit_product.php';
+        }
+
+        public function updateProduct($productId) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $data = [
+                    'name' => $_POST['name'],
+                    'price' => $_POST['price'],
+                    'description' => $_POST['description'],
+                    'image' => $_POST['image'],
+                    'quantity' => $_POST['quantity'],
+                    'category_id' => $_POST['category_id']
+                ];
+
+                if ($this->model->updateProduct($productId, $data)) {
+                    $_SESSION['message'] = "Cập nhật sản phẩm thành công";
+                } else {
+                    $_SESSION['error'] = "Cập nhật sản phẩm thất bại";
+                }
+
+                header("Location: Basecontroller.php?action=products_display");
+                exit();
+            }
+        }
+
+    }
+?>
