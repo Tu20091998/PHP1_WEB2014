@@ -9,6 +9,10 @@
 <body>
     <h1>Danh mục kèm sản phẩm</h1>
     
+    <div class="add-product">
+        <a href="../Controllers/BaseController.php?action=add_product_display" class="add-btn">+ Thêm sản phẩm</a>
+    </div>
+
     <?php if (isset($_SESSION['message'])): ?>
         <div class="message success"><?= $_SESSION['message'] ?></div>
         <?php unset($_SESSION['message']); ?>
@@ -43,7 +47,7 @@
             <td><?= htmlspecialchars($p['product_quantity']) ?></td>
             <td class="action-buttons">
                 <a href="../Controllers/BaseController.php?action=edit_product&id=<?php echo $p['id'] ?>" class="edit-btn">Sửa</a>
-                <a href="index.php?action=delete_product&id=<?= $p['id'] ?>" class="delete-btn" 
+                <a href="../Controllers/BaseController.php?action=delete_product&id=<?php echo $p['id'] ?>" class="delete-btn" 
                     onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này?');">Xoá</a>
             </td>
         </tr>

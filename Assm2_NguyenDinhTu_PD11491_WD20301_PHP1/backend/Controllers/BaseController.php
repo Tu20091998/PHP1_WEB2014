@@ -81,9 +81,35 @@
             }
         break;
 
+        case 'add_product_display':
+            $add_product_display = new ProductController();
+            $add_product_display->add_product_display();
+        break;
+
+        case "add_product_confirm":
+            $add_product_confirm = new ProductController();
+            $add_product_confirm->add_product_confirm();
+        break;
+
+        //xử lý yêu cầu đặt hàng
         case "order_display":
             $order_display = new OrderController();
             $order_display->order_display();
+        break;
+
+        case "order_confirm":
+            $order_confirm = new OrderController();
+            $order_confirm->order_confirm();
+        break;
+
+        case "order_detail":
+            $order_detail = new OrderController();
+            $order_detail->order_detail_display();
+        break;
+
+        case "order_cancer":
+            $order_cancer = new OrderController();
+            $order_cancer->cancel_order();
         break;
     }
 ?>

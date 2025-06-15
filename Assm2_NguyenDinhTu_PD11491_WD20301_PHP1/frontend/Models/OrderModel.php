@@ -107,18 +107,6 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        // Lấy tất cả đơn hàng (cho admin)
-        public function getAllOrders() {
-            $stmt = $this->order_model->prepare(
-                "SELECT o.order_id, o.user_id, u.username, o.order_date, 
-                        o.total_amount, o.status
-                FROM orders o
-                JOIN users u ON o.user_id = u.user_id
-                ORDER BY o.order_date DESC"
-            );
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
 
         //hàm cập nhật trạng thái đơn hàng
         public function updateOrderStatus($order_id, $status) {

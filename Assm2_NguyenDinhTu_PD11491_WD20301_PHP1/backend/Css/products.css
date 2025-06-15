@@ -1,7 +1,8 @@
-body {
+        body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -54,4 +55,22 @@ body {
         .error {
             background-color: #f2dede;
             color: #a94442;
+        }
+
+        .add-product {
+            margin: 20px 0;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
         }

@@ -92,7 +92,7 @@
             $canCancel = false;
 
             foreach ($userOrders as $order) {
-                if ($order['order_id'] == $order_id && $order['status'] === 'Đang xử lý') {
+                if ($order['order_id'] == $order_id && $order['status'] === 'Chờ xử lý') {
                     $canCancel = true;
                     break;
                 }

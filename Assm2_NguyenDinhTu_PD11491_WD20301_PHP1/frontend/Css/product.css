@@ -44,6 +44,11 @@
         margin: 10px;
         color: #2c3e50;
         max-height: 24px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 70%;
+        display: inline-block;
     }
 
     .product-box .product-price{

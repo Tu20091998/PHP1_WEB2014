@@ -34,7 +34,6 @@
         public function showEditProductForm($productId) {
             $product = $this->model->getProductById($productId);
             $categories = $this->model->getAllCategories();
-
             require_once ROOT.'/Views/edit_product.php';
         }
 
@@ -60,5 +59,34 @@
             }
         }
 
+        //hàm lấy danh mục sản phẩm cho phần hiển thị thêm sản phẩm
+        public function add_product_display(){
+            $categories = $this->model->getAllCategories();
+            require_once ROOT."/Views/add_product.php";
+        }
+
+        //hàm xử lý thêm sản phẩm
+        public function add_product_confirm(){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                 // Chuẩn bị dữ liệu
+                $data = [
+                    'name' => htmlspecialchars($_POST['name']),
+                    'price' => floatval($_POST['price']),
+                    'image' => $_POST["image"],
+                    'description' => htmlspecialchars($_POST['description']),
+                    'category_id' => intval($_POST['category_id']),
+                    'product_quantity' => intval($_POST['product_quantity'])
+                ];
+
+                // Thêm vào database
+                if ($this->model->addProduct($data)) {
+                    $_SESSION['message'] = "Thêm sản phẩm thành công!";
+                    header('Location:BaseController.php?action=add_product_display');
+                } else {
+                    $_SESSION['message'] = "Lỗi khi thêm sản phẩm";
+                    header('Location:BaseController.php?action=add_product_display');
+                }
+            }
+        }
     }
 ?>
