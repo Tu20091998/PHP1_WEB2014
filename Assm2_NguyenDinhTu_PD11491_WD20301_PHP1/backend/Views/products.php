@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../Css/products.css">
 </head>
 <body>
-    <h1>Danh mục kèm sản phẩm</h1>
+    <h1 style="text-align: center;">Danh mục kèm sản phẩm</h1>
+
+    <h2 style="text-align: center;">Tổng số lượng sản phẩm là: <?php echo $product_count?> sản phẩm</h2>
     
     <div class="add-product">
         <a href="../Controllers/BaseController.php?action=add_product_display" class="add-btn">+ Thêm sản phẩm</a>
@@ -25,6 +27,7 @@
 
     <table>
         <tr>
+            <th>STT</th>
             <th>ID danh mục</th>
             <th>Tên danh mục</th>
             <th>ID SP</th>
@@ -35,8 +38,10 @@
             <th>Số lượng</th>
             <th>Thao tác</th>
         </tr>
+        <?php $stt = 1; ?>
         <?php foreach ($categories_list as $p): ?>
         <tr>
+            <td><?= $stt++ ?></td>
             <td><?= htmlspecialchars($p['category_id']) ?></td>
             <td><?= htmlspecialchars($p['category_name']) ?></td>
             <td><?= htmlspecialchars($p['id']) ?></td>

@@ -16,6 +16,7 @@
 
         // Hàm hiển thị sản phẩm kèm danh mục
         public function showCategoriesWithProducts() {
+            $product_count = $this->model->countProduct();
             $categories_list = $this->model->getCategoriesWithProducts();
             require_once ROOT.'Views/products.php';
         }

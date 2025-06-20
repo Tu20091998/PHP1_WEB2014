@@ -46,25 +46,17 @@
                         </td>
                         <td><?= htmlspecialchars($order['user_id'] ?? 'Khách vãng lai') ?></td> <!-- Hiển thị tên KH -->
                         <td class="actions">
-                            <a href="../Controllers/AdminController.php?action=order_detail&id=<?= $order['order_id'] ?>" 
+                            <a href="../Controllers/BaseController.php?action=order_detail&id=<?= $order['order_id'] ?>" 
                                 class="btn detail">Chi tiết</a>
                             
                             <!-- Chỉ cho phép hủy nếu đơn ở trạng thái chờ xử lý -->
                             <?php if ($order['status'] == 'Chờ xử lý'): ?>
-                                <a href="../Controllers/AdminController.php?action=cancel_order&id=<?= $order['order_id'] ?>" 
+                                <a href="../Controllers/BaseController.php?action=order_cancer&id=<?= $order['order_id'] ?>" 
                                     class="btn cancel"
                                     onclick="return confirm('Xác nhận hủy đơn #<?= $order['order_id'] ?>?')">
                                     Hủy
                                 </a>
                             <?php endif; ?>
-                            
-                            <!-- Thêm nút cập nhật trạng thái -->
-                            <select onchange="updateStatus(this, <?= $order['order_id'] ?>)">
-                                <option value="Đã huỷ" <?= $order['status'] == 'Đã huỷ' ? 'selected' : '' ?>>Đã huỷ</option>
-                                <option value="Chờ xử lý" <?= $order['status'] == 'Chờ xử lý' ? 'selected' : '' ?>>Chờ xử lý</option>
-                                <option value="Đang xử lý" <?= $order['status'] == 'Đang xử lý' ? 'selected' : '' ?>>Đang xử lý</option>
-                                <option value="Hoàn thành" <?= $order['status'] == 'Hoàn thành' ? 'selected' : '' ?>>Hoàn thành</option>
-                            </select>
                         </td>
                     </tr>
                     <?php endforeach; ?>

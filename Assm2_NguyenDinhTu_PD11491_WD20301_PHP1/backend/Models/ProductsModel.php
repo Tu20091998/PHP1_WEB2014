@@ -22,7 +22,7 @@
 
         //tạo hàm lấy danh sách sản phẩm bán chạy
         public function getProductsBestSeller(){
-            $sql = "SELECT p.image, p.name, p.price, COUNT(odt.product_id) AS total_sold
+            $sql = "SELECT p.image, p.name, p.price, SUM(odt.quantity) AS total_sold
                     FROM products p JOIN order_detail odt ON p.id = odt.product_id
                     GROUP BY odt.product_id
                     ORDER BY total_sold DESC
@@ -116,6 +116,16 @@
                 error_log("Lỗi khi thêm sản phẩm: " . $e->getMessage());
                 return false;
             }
+        }
+
+        //tạo hàm lấy tổng số sản phẩm trong cơ sở dữ liệu
+        public function countProduct(){
+            $sql = "SELECT COUNT(*) FROM products";
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute();
+
+            //trả về 1 cột chứa số đếm
+            return $stmt->fetchColumn();
         }
     }
 ?>

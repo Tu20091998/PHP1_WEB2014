@@ -7,7 +7,7 @@
 </head>
 <style>
     iframe{
-        background: linear-gradient(to right, #4facfe, #00f2fe);
+        background: whitesmoke;
         width: 100%;
         height: calc(100% - 180px);
         border: none;

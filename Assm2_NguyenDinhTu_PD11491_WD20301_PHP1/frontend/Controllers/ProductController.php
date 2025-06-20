@@ -42,5 +42,8 @@
                 require_once ROOT."/Views/product_search.php";
             }
         }
+
+        //hàm đếm số sản phẩm có danh mục là đồ điện tử
+        
     }
 ?>

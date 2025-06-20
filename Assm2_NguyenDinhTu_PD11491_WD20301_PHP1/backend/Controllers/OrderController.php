@@ -44,7 +44,48 @@
             } else {
                 $_SESSION['error'] = "Lỗi khi cập nhật trạng thái";
             }
-            header("Location: ../Views/admin/orders.php");
+            header("Location: ../Views/orders.php");
+        }
+
+        
+        public function cancel_order() {
+            session_start();
+            
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
+            $order_id = $_GET['id'] ?? null;
+        
+            $orderModel = new OrderModel();
+
+            // Kiểm tra đơn hàng có thuộc về user này không
+            $userOrders = $orderModel->getOrdersByUser($order_id);
+            $canCancel = false;
+
+            foreach ($userOrders as $order) {
+                if ($order['order_id'] == $order_id && $order['status'] === 'Chờ xử lý') {
+                    $canCancel = true;
+                    break;
+                }
+            }
+        
+            if ($canCancel) {
+                // Cập nhật trạng thái đơn hàng
+                if ($orderModel->updateOrderStatus($order_id, 'Đã huỷ')) {
+                    $_SESSION['success'] = "Đã hủy đơn hàng #".$order_id;
+                } else {
+                    $_SESSION['error'] = "Hủy đơn hàng thất bại";
+                }
+            } else {
+                $_SESSION['error'] = "Không thể hủy đơn hàng này";
+            }
+        
+            header("Location: BaseController.php?action=order_display");
+            exit;
         }
     }
+    
 ?>

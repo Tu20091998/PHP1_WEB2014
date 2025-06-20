@@ -23,6 +23,13 @@
 
         //điều khiển người quản trị
         case "home_display":
+
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
             //thông tin sản phẩm hết hàng
             $products = new ProductController();
             $products->products_information();
@@ -45,6 +52,13 @@
 
         //điều khiển hiển thị xử lý người dùng
         case "users_display":
+
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
             $users_display = new UserController();
             $users_display->users_display();
         break;
@@ -56,6 +70,13 @@
         
         //xử lý điều khiển sản phẩm
         case "products_display":
+
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
             $products_display = new ProductController();
             $products_display->showCategoriesWithProducts();
         break;
@@ -93,6 +114,12 @@
 
         //xử lý yêu cầu đặt hàng
         case "order_display":
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
             $order_display = new OrderController();
             $order_display->order_display();
         break;
@@ -110,6 +137,20 @@
         case "order_cancer":
             $order_cancer = new OrderController();
             $order_cancer->cancel_order();
+        break;
+
+        //điều khiển người quản trị
+        default:
+
+            if (!isset($_SESSION['admin_id'])) {
+                $_SESSION["message"] = "Bạn cần đăng nhập để thực hiện các chức năng !";
+                header('Location:BaseController.php?action=login_display');
+                exit;
+            }
+
+            //thông tin sản phẩm hết hàng
+            $products = new ProductController();
+            $products->products_information();
         break;
     }
 ?>
