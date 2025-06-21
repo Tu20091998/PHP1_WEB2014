@@ -32,7 +32,7 @@
         </tr>
         <?php endforeach; ?>
     </table>
-    
+    <hr>
     <h2>Danh sách sản phẩm bán chạy</h2>
     
     <table border="1" cellpadding="10" cellspacing="0">
@@ -55,6 +55,68 @@
                     <td><?= $product['name'] ?></td>
                     <td><?= number_format($product['price']) ?> VND</td>
                     <td><?= $product['total_sold'] ?> sản phẩm</td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <hr>
+    <h2>Danh sách sản phẩm có lượt bán thấp</h2>
+    
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Đã bán</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $stt = 1;
+            foreach ($lowest_seller as $product): ?>
+                <tr>
+                    <td><?= $stt++ ?></td>
+                    <td><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" width="80"></td>
+                    <td><?= $product['name'] ?></td>
+                    <td><?= number_format($product['price']) ?> VND</td>
+                    <td><?= $product['total_sold'] ?> sản phẩm</td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <hr>
+    <h2>Tổng số sản phẩm đã bán được: <?php echo $products_sum_sales ?></h2>
+    <h2>Danh sách sản phẩm và số lượng đã bán</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng đã bán</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $stt = 1;
+                
+                foreach ($product_list_quantity_sales as $product): 
+            ?>
+                <tr>
+                    <td><?php echo $stt++; ?></td>
+                    <td>
+                        <?php if (!empty($product['image'])): ?>
+                            <img src="<?php echo htmlspecialchars($product['image']); ?>" width="60">
+                        <?php else: ?>
+                            <span>No image</span>
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo htmlspecialchars($product['name']); ?></td>
+                    <td><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</td>
+                    <td><?php echo $product['total_sold']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

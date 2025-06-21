@@ -24,5 +24,15 @@
             $stmt = $this->model->prepare("DELETE FROM users WHERE id = :id");
             return $stmt->execute([':id' => $id]);
         }
+
+        //hàm đếm số lượng người dùng
+        public function countUsers(){
+            $sql = "SELECT COUNT(*) FROM users";
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute();
+
+            //trả về 1 cột chứa số đếm
+            return $stmt->fetchColumn();
+        }
     }
 ?>

@@ -9,8 +9,20 @@
 
         //hàm hiển thị danh mục sản phẩm sắp hết hàng
         public function products_information(){
+            //hiển thị hết hàng
             $products_out_of_stock_list = $this->model->getProductsOutOfStockList();
+
+            //hiển thị bán chạy
             $best_seller = $this->model->getProductsBestSeller();
+
+            //hiển thị bán thấp
+            $lowest_seller = $this->model->getProductsLowestSeller();
+
+            //hiển thị tổng bán được
+            $products_sum_sales = $this->model->getTotalSoldProducts();
+
+            //hiển thị tổng bán được cho từng sản phẩm
+            $product_list_quantity_sales = $this->model->getAllProductsSales();
             require_once ROOT."/Views/home_admin.php";
         }
 
@@ -32,6 +44,7 @@
             exit();
         }
 
+        
         public function showEditProductForm($productId) {
             $product = $this->model->getProductById($productId);
             $categories = $this->model->getAllCategories();

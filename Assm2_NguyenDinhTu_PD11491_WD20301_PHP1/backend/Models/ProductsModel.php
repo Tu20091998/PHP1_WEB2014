@@ -25,6 +25,7 @@
             $sql = "SELECT p.image, p.name, p.price, SUM(odt.quantity) AS total_sold
                     FROM products p JOIN order_detail odt ON p.id = odt.product_id
                     GROUP BY odt.product_id
+                    HAVING total_sold >= 4
                     ORDER BY total_sold DESC
                     ";
             $stmt = $this->model->prepare($sql);
@@ -126,6 +127,52 @@
 
             //trả về 1 cột chứa số đếm
             return $stmt->fetchColumn();
+        }
+
+        //hàm lấy tất cả sản phẩm có lượt mua thấp
+        public function getProductsLowestSeller(){
+            $sql = "SELECT p.image, p.name, p.price, SUM(odt.quantity) AS total_sold
+                    FROM products p JOIN order_detail odt ON p.id = odt.product_id
+                    GROUP BY odt.product_id
+                    HAVING total_sold <= 3
+                    ORDER BY total_sold ASC
+                    ";
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        //hàm lấy tổng số lượng sản phẩm đã bán được
+        public function getTotalSoldProducts() {
+            $sql = "SELECT SUM(quantity) AS total_all_sold 
+                    FROM order_detail";
+
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total_all_sold'] ?? 0; // Trả về 0 nếu không có dữ liệu
+        }
+
+        //hàm lấy danh sách sản phẩm kèm theo số lượng bán được từng sản phẩm
+        public function getAllProductsSales() {
+            $sql = "SELECT 
+                        p.id,
+                        p.image,
+                        p.name,
+                        p.price,
+                        COALESCE(SUM(od.quantity), 0) AS total_sold
+                    FROM 
+                        products p
+                    LEFT JOIN 
+                        order_detail od ON p.id = od.product_id
+                    GROUP BY 
+                        p.id
+                    ORDER BY 
+                        total_sold DESC";
+
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 ?>

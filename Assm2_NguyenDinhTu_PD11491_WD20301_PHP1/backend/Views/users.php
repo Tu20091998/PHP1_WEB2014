@@ -9,6 +9,7 @@
 <body>
 
     <h2>Danh sách người dùng</h2>
+    <h4>Số lượng người dùng: <?php echo $users_count?></h4>
     <?php if (isset($_SESSION['message'])): ?>
             <div class="message <?= strpos($_SESSION['message'], 'thất bại') !== false ? 'error' : '' ?>">
                 <?= $_SESSION['message']; ?>

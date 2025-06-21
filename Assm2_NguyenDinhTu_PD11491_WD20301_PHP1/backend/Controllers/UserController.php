@@ -18,6 +18,7 @@
             }
 
             $users = $this->model->getAllUsers();
+            $users_count = $this->model->countUsers();
             require_once ROOT."/Views/users.php";
         }
 
