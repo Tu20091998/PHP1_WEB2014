@@ -30,7 +30,7 @@
                 exit;
             }
 
-            //thông tin sản phẩm hết hàng
+            //thông tin tình hình chung của shop
             $products = new ProductController();
             $products->products_information();
         break;

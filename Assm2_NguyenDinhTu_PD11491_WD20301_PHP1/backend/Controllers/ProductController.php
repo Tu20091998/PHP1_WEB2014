@@ -44,13 +44,14 @@
             exit();
         }
 
-        
+        //hàm hiển thị form chỉnh sửa sản phẩm
         public function showEditProductForm($productId) {
             $product = $this->model->getProductById($productId);
             $categories = $this->model->getAllCategories();
             require_once ROOT.'/Views/edit_product.php';
         }
 
+        //hàm cập nhật thông tin sản phẩm
         public function updateProduct($productId) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data = [

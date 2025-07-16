@@ -14,7 +14,8 @@
         public function products_list_pagisnated(){
             //gọi để hiển thị thông báo thêm hay cập nhật sản phẩm
             session_start();
-            $limit = 3;
+            
+            $limit = 8;
             $page = isset($_GET["page"]) ? max(1,intval($_GET["page"])): 1;
             $offset = ($page - 1) * $limit;
 
@@ -42,8 +43,5 @@
                 require_once ROOT."/Views/product_search.php";
             }
         }
-
-        //hàm đếm số sản phẩm có danh mục là đồ điện tử
-        
     }
 ?>

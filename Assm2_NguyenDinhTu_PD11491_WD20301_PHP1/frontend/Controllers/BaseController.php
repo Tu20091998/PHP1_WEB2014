@@ -15,7 +15,7 @@
     require_once ROOT."/Controllers/OrderController.php";
 
     //xét giá trị trả về của đường dẫn
-    $action = $_GET["action"] ?? "products";
+    $action = $_GET["action"] ?? "products_display";
 
     //xét giá trị của đường dẫn sản phẩm
     switch($action){
@@ -111,7 +111,8 @@
         break;
         
         default:
-            echo "Trang không tồn tại !"; 
+            $products_display = new ProductController();
+            $products_display->products_list_pagisnated();
         break;
     }
 ?>

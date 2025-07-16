@@ -12,8 +12,8 @@
         }
 
         //tạo hàm xử lý đăng ký
-        public function RegisterUserModel($email,$password){
-            //kiểm tra email có trong cơ sở dữ liệu hay không?
+        public function RegisterUserModel($fullname,$email,$phone,$gender,$birthdate,$address,$password){
+
             $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':email',$email,PDO::PARAM_STR);
@@ -23,12 +23,20 @@
                 return "Email đã tồn tại !";
             }
 
-            //nếu email chưa tồn tại thì mã hoá mật khẩu
             $password_hashed = password_hash($password,PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users(email,password) VALUES(:email,:password)";
+
+            $sql = "INSERT INTO users (fullname, email, phone, gender, birthdate, address, password) 
+                    VALUES (:fullname, :email, :phone, :gender, :birthdate, :address, :password)";
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(":email",$email,PDO::PARAM_STR);
-            $stmt->bindParam(":password",$password_hashed,PDO::PARAM_STR);
+
+            $stmt->bindParam(':fullname', $fullname, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+            $stmt->bindParam(':gender', $gender, PDO::PARAM_STR);
+            $stmt->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
+            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password_hashed, PDO::PARAM_STR);
 
             //xét kết quả trả về của đăng ký
             if($stmt->execute()){
@@ -57,19 +65,19 @@
         }
 
         //hàm xử lý kiểm tra mật khẩu cũ
-        public function verifyPassword($user_id,$old_password){
-            $stmt = $this->conn->prepare("SELECT password FROM users WHERE id = ?");
-            $stmt->execute([$user_id]);
+        public function verifyPassword($email,$old_password){
+            $stmt = $this->conn->prepare("SELECT password FROM users WHERE email = ?");
+            $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return password_verify($old_password, $user["password"]);
         }
 
         //hàm xử lý cập nhật mật khẩu mới
-        public function updatePassword($user_id, $new_password){
+        public function updatePassword($email, $new_password){
             $hashedPassword = password_hash($new_password,PASSWORD_DEFAULT);
-            $stmt = $this->conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-            return $stmt->execute([$hashedPassword,$user_id]);
+            $stmt = $this->conn->prepare("UPDATE users SET password = ? WHERE email = ?");
+            return $stmt->execute([$hashedPassword,$email]);
         }  
     }
 ?>

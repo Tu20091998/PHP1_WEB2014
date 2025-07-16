@@ -36,7 +36,7 @@
             if (!isset($_SESSION["user_id"])) {
                 $_SESSION['login_message'] = 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng';
                 header("Location: BaseController.php?action=login_display");
-                exit(); // Luôn dùng exit() sau header Location
+                exit();
             }
             
             $user_id = $_SESSION["user_id"] ?? 1;
@@ -63,14 +63,13 @@
             //kiểm tra đăng nhập
             if (!isset($_SESSION["user_id"])) {
                 header("Location:BaseController.php?action=login_display");
-                echo "<script>alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng')</script>";
+                echo "<script>alert('Bạn cần đăng nhập để xoá sản phẩm khỏi giỏ hàng')</script>";
                 return;
             }
 
             $user_id = $_SESSION["user_id"];
             $product_id = $_POST["product_id"];
 
-             // Thực hiện xóa
             if ($this->cart_model->removeItem($user_id, $product_id)) {
                 $_SESSION['success'] = "Đã xóa sản phẩm khỏi giỏ hàng";
             } else {

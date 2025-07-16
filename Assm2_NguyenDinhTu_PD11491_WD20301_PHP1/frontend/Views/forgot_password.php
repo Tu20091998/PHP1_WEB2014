@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="../Css/forgot_password.css">
+    <link rel="stylesheet" href="../Css/common.css">
 </head>
-<style>
-    .announce{
-        text-align: center;
-    }
-</style>
 <body>
     <div class="forgot-container" >
         <div class="announce">
-            <?php session_start()?>
             <?php if (isset($_SESSION['error'])): ?>
                 <div><?= $_SESSION['error'] ?></div>
                 <?php unset($_SESSION['error']); ?>
@@ -28,6 +23,12 @@
         
         <form class="forgot-form" method="post" action="../Controllers/BaseController.php?action=forgot_password_confirm">
             <h2>Quên mật khẩu</h2>
+
+            <div class="input-group">
+                <label for="password">Email của bạn</label>
+                <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+            </div>
+
             <div class="input-group">
                 <label for="password">Mật khẩu cũ</label>
                 <input type="password" id="password" name="old_password" placeholder="Nhập mật khẩu cũ" required>
@@ -43,5 +44,6 @@
         <div class="form-links">
             <button><a href="../Controllers/BaseController.php?action=login_display">Quay về trang đăng nhập</a></button>
         </div>
+
 </body>
 </html>

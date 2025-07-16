@@ -20,9 +20,9 @@
         }
 
         //hàm xoá người dùng theo id
-        public function deleteUserById($id) {
+        public function deleteUserById($userId) {
             $stmt = $this->model->prepare("DELETE FROM users WHERE id = :id");
-            return $stmt->execute([':id' => $id]);
+            return $stmt->execute([':id' => $userId]);
         }
 
         //hàm đếm số lượng người dùng

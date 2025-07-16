@@ -20,7 +20,6 @@
         <tr>
             <th>ID</th>
             <th>Email</th>
-            <th>Mật khẩu</th>
             <th>Ngày đăng ký</th>
             <th>Hành động</th>
         </tr>
@@ -29,7 +28,6 @@
         <tr>
             <td><?= htmlspecialchars($user['id']) ?></td>
             <td><?= htmlspecialchars($user['email']) ?></td>
-            <td><?= htmlspecialchars($user['password']) ?></td>
             <td><?= htmlspecialchars($user['register_date']) ?></td>
             <td>
                 <form method="POST" action="../Controllers/BaseController.php?action=user_delete" onsubmit="return confirm('Bạn có chắc muốn xóa người dùng này?');">

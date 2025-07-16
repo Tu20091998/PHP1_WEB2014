@@ -1,101 +1,111 @@
-*{
-        box-sizing: border-box;
-        margin: 0;
-        padding:0;
-    }
+/* ==== FORM CONTAINER ==== */
+.register-container {
+    background-color: white;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 5rem auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
 
-    body{
-        background: linear-gradient(to right, #4facfe, #00f2fe);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+/* ==== FORM TITLE ==== */
+.register-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
 
-    .register-container{
-        background: white;
-        padding: 50px;
-        border-radius: 10px;
-        box-shadow: 0 5px 16px;
-        width: 400px;
-    }
+/* ==== NHÓM INPUT ==== */
+.input-group {
+    margin-bottom: 1rem;
+}
 
-    .register-form{
-        text-align: center;
-        margin-bottom: 24px;
-    }
+.input-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
 
-    .input-group{
-        margin-top: 10px;
-    }
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="date"],
+.input-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: #fff;
+}
 
-    .input-group label{
-        font-size: 18px;
-        color: #333;
-    }
+/* ==== RADIO GROUP (GIỚI TÍNH) ==== */
+.input-group input[type="radio"] {
+    margin-right: 0.3rem;
+    transform: scale(1.1);
+}
 
-    .input-group input{
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
+.input-group label[for="gender"] {
+    margin-bottom: 0.3rem;
+    display: block;
+}
 
-    .input-group input:focus{
-        border-color: #00f2fe;
-        outline: none;
-    }
+.input-group label input[type="radio"] {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
 
-    .btn-register{
-        width: 100%;
-        padding:12px;
-        border: none;
-        background-color: lightgray;
-        color: #4facfe;
-        border-radius: 10px;
-        font-size: 18px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
+/* ==== NÚT ĐĂNG KÝ ==== */
+.btn-register {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 0.5rem;
+}
 
-    button:hover{
-        background-color: #00f2fe;
-    }
+.btn-register:hover {
+    opacity: 0.85;
+}
 
-    .signup-link{
-        color: #4facfe;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+/* ==== THÔNG BÁO LỖI ==== */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
 
-    .form-links{
-        margin-top: 10px;
-        text-align: center;
-    }
+/* ==== LIÊN KẾT PHỤ ==== */
+.form-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
 
-    .form-links button{
-        padding:8px;
-        border: none;
-        background-color: lightgray;
-        color: #4facfe;
-        border-radius: 10px;
-        font-size: 20px;
-        cursor: pointer;
-    }
+.form-links button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #6c757d;
+    color: white;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
 
-    .form-links a {
-        padding:8px;
-        border: none;
-        background-color: lightgray;
-        color: #4facfe;
-        border-radius: 10px;
-        font-size: 15px;
-        cursor: pointer;
-        text-decoration: none;
-    }       
+.form-links button:hover {
+    background-color: #5a6268;
+}
 
-    .form-links a:hover {
-        background-color: #00f2fe;
-        color: white;
-    }
+.form-links button a {
+    color: white;
+    text-decoration: none;
+}

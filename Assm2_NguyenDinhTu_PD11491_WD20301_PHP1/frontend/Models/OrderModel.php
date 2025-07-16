@@ -41,13 +41,13 @@
                 // 3. Tạo đơn hàng chính
                 $stmt = $this->order_model->prepare(
                     "INSERT INTO orders (user_id, order_date, total_amount) 
-                    VALUES (:user_id, NOW(), :total_amount)"
+                            VALUES (:user_id, NOW(), :total_amount)"
                 );
                 $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
                 $stmt->bindParam(":total_amount", $totalAmount);
                 $stmt->execute();
 
-                $order_id = $this->order_model->lastInsertId();
+                $order_id = $this->order_model->lastInsertId();//lấy order_id sau khi đã tạo được đơn hàng
 
                 // 4. Thêm chi tiết đơn hàng
                 foreach ($cartItems as $item) {

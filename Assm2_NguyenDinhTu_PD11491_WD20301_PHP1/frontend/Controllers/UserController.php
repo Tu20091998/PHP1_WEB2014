@@ -24,29 +24,29 @@
         public function register_confirm(){
             
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                //xét kết quả nhận được từ form người dùng đăng ký
-                $email = $_POST['email'] ?? '';
-                $password = $_POST['password'] ?? '';
-                $confirm_password = $_POST['confirm_password'] ?? '';
 
-                //xét mật khẩu và mật khẩu xác nhận không khớp
+                $fullname = $_POST['fullname'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $gender = $_POST['gender'];
+                $birthdate = $_POST['birthdate'];
+                $address = $_POST['address'];
+                $password = $_POST['password'];
+                $confirm_password = $_POST['confirm_password'];
+
                 if($password !== $confirm_password){
                     $_SESSION['register_error'] = 'Mật khẩu không khớp !';
                     header("Location: BaseController.php?action=register_display");
                     exit;
                 }
 
-                //gọi đối tượng xử lý đăng ký ở database và lấy kết quả
-                $result = $this->user_model->RegisterUserModel($email,$password);
+                $result = $this->user_model->RegisterUserModel($fullname,$email,$phone,$gender,$birthdate,$address,$password);
 
-                //xét trả về kết quả ở màn hình
                 if($result === true){
-                    //nếu đăng ký được thì thông báo đăng ký thành công
                     $_SESSION['register_success'] = 'Đăng ký thành công! Vui lòng đăng nhập'; 
                     header("Location: BaseController.php?action=login_display");
                 }
                 else{
-                    //nếu lỗi đăng ký thì gán lỗi và về trang đăng ký
                     $_SESSION['register_error'] = 'Đăng ký thất bại. Vui lòng thử lại';
                     header("Location: BaseController.php?action=register_display");
                 }
@@ -132,7 +132,7 @@
             //nhận yêu cầu người dùng
             if($_SERVER["REQUEST_METHOD"] === "POST"){
                 session_start();
-                $user_id = $_SESSION["user_id"] ?? null;
+                $email = $_POST["email"] ?? null;
                 $old_password = $_POST["old_password"] ?? "";
                 $new_password = $_POST["new_password"] ?? "";
 
@@ -144,14 +144,14 @@
                 }
 
                 //kiểm tra mật khẩu cũ
-                if(!$this->user_model->verifyPassword($user_id,$old_password)){
+                if(!$this->user_model->verifyPassword($email,$old_password)){
                     $_SESSION['error'] = 'Mật khẩu cũ không đúng';
                     header("Location: BaseController.php?action=forgot_password_display");
                     exit;
                 }
 
                 //cập nhật mật khẩu mới
-                if($this->user_model->updatePassword($user_id,$new_password)){
+                if($this->user_model->updatePassword($email,$new_password)){
                     $_SESSION["success"] = "Đổi mật khẩu thành công !";
                 }
                 else{

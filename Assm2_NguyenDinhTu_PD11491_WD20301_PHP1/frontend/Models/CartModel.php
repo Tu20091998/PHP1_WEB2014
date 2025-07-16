@@ -39,7 +39,6 @@
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            //xét dòng trả về
             if($row){
                 //nếu sản phẩm có trong giỏ thì cập nhật số lượng
                 $new_quantity = $row["quantity"] + 1;

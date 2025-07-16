@@ -1,3 +1,4 @@
+
 <?php
     //tạo đường dẫn tuyệt đối
     define("ROOT",__DIR__);
@@ -7,7 +8,6 @@
 
     //nạp trang main
     require_once ROOT."/Views/main.php";
-
 
     //nạp cuối trang
     require_once ROOT."/Views/footer.php";

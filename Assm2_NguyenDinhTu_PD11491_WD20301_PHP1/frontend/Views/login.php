@@ -1,8 +1,4 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +6,15 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập tài khoản</title>
     <link rel="stylesheet" href="../Css/login.css">
+    <link rel="stylesheet" href="../Css/common.css">
 </head>
 <body>
+    <?php
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    ?>
+    
     <?php
         if (isset($_SESSION['login_message'])) {
         echo "<script>alert('" . $_SESSION['login_message'] . "')</script>";
@@ -19,6 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
     }
     ?>
     <div class="login-container">
+        <?php if (!empty($error)) echo "<p style='color:red; text-align:center;'>$error</p>"; ?>
         <!-- Hiển thị thông báo thành công từ đăng ký -->
         <?php if (isset($_SESSION['register_success'])): ?>
             <div class="alert alert-success">
@@ -28,25 +32,24 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
 
         <form class="login-form" method="post" action="../Controllers/BaseController.php?action=login_confirm">
-            <h2>Đăng nhập</h2>
+            <h2 style="text-align: center;">Đăng nhập</h2>
             <div class="input-group">
-                <label for="email">Email đăng nhập</label>
+                <label for="email">Email:</label>
                 <input type="text" id="email" name="email" placeholder="Nhập email đăng nhập" required>
             </div>
             <div class="input-group">
-                <label for="password">Mật khẩu</label>
+                <label for="password">Mật khẩu:</label>
                 <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
             </div>
             <br>
             <button type="submit" class="btn-login">Đăng nhập ngay</button>
-            <p class="signup-link">Bạn chưa có tài khoản</p>
+            <p class="signup-link">Bạn chưa có tài khoản ?</p>
         </form>
 
         <div class="form-links">
             <button><a href="../Controllers/BaseController.php?action=register_display">Đăng ký ngay</a></button>
             <button><a href="../Controllers/BaseController.php?action=forgot_password_display">Quên mật khẩu</a></button>
         </div>
-        <?php if (!empty($error)) echo "<p style='color:red; text-align:center;'>$error</p>"; ?>
     </div>
 </body>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang trả về lỗi</title>
+    <title>Error</title>
 </head>
 <body>
-    <p>Lỗi thì trả về ở đây</p>
+    <h1>404 - Page not found</h1>
 </body>
 </html>

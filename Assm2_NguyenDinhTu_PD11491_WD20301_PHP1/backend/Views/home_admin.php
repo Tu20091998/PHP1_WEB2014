@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục kèm sản phẩm</title>
+    <link rel="stylesheet" href="../Css/home_admin.css">
 </head>
 <body>
     <h1>Tình hình chung của Shopping_Cart</h1>
