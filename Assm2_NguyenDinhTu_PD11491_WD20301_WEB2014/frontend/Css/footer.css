@@ -1,0 +1,84 @@
+/* ==== FOOTER CHI TIẾT ==== */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-bottom: 1rem;
+}
+
+.footer-section h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section a {
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+
+.footer-section p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer .social-links a {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.footer .social-links a:hover {
+    transform: scale(1.2);
+}
+
+.footer .newsletter-form input[type="email"] {
+    padding: 0.5rem;
+    width: 100%;
+    border: none;
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+}
+
+.footer .newsletter-form button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.footer .newsletter-form button:hover {
+    background-color: #fff;
+    opacity: 0.9;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1rem;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #eee;
+}
+    

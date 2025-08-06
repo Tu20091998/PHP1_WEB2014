@@ -1,0 +1,73 @@
+ /* Chỉ thêm nếu cần chỉnh cụ thể cho trang này */
+        .page-wrapper {
+            max-width: var(--max-width);
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .product-filter-form {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .product-filter-form label {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .comments-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .comments-table th,
+        .comments-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .comments-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comments-table td a {
+            color: white;
+        }
+
+        .action-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .action-button:hover {
+            opacity: 0.85;
+        }
+
+        .no-comments {
+            text-align: center;
+            padding: 2rem;
+            background-color: #fff3f3;
+            border-radius: var(--radius);
+            border: 1px dashed var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }

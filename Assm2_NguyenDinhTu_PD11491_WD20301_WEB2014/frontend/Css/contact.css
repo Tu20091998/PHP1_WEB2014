@@ -1,0 +1,33 @@
+.contact_container {
+    max-width: var(--max-width);
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+    background-color: white;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+}
+
+.contact_container h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact_container p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.contact_container .icon-style-4,
+.contact_container .location {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+iframe {
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: var(--shadow);
+    margin-top: 1rem;
+}
